@@ -69,7 +69,7 @@ void searchDictionary(struct key* keys, char* number) {
 
 int checkNumber(char* number) {
     for (int i = 0; i < 7; i++) {
-        if (number[i] == '1' || number[i] == '0') return 0;
+        if (number[i] < '2' || number[i] > '9') return 0;
     }
     return 1;
 }
