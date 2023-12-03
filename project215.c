@@ -2,7 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 
-void generateWords(int phoneNum[], int currentIndex, char currentWord[], FILE *outputFile);
+void generateWords(int phoneNum[], char currentWord[], FILE *outputFile);
 void convertToLower(char *word);
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
     char word[8];
     FILE *outputFile = fopen("output.txt", "w");
 
-    generateWords(phoneNumber, 0, word, outputFile);
+    generateWords(phoneNumber,word, outputFile);
 
     fclose(outputFile);
 
@@ -47,6 +47,7 @@ int main() {
         rewind(outputFile);
         
         while (fscanf(outputFile, "%s", tempWord) != EOF) {
+            convertToLower(tempWord);
             if (strcmp(word, tempWord) == 0) {
                 fprintf(matchedWordsFile, "%s\n", word);
                 break;
@@ -61,21 +62,33 @@ int main() {
     return 0;
 }
 
-void generateWords(int phoneNum[], int currentIndex, char currentWord[], FILE *outputFile) {
-    int i;
-   const char letters[10][4] = {
+void generateWords(int phoneNum[], char currentWord[], FILE *outputFile) {
+    int a, b, c, d, e, f, g;
+    const char letters[10][5] = {
         "", "", "ABC", "DEF", "GHI", "JKL", "MNO", "PRS", "TUV", "WXY"
     };
 
-    if (currentIndex == 7) {
-        fprintf(outputFile, "%s\n", currentWord);
-        return;
-    }
-
-    int digit = phoneNum[currentIndex];
-    for ( i = 0; i < strlen(letters[digit]); i++) {
-        currentWord[currentIndex] = letters[digit][i];
-        generateWords(phoneNum, currentIndex + 1, currentWord, outputFile);
+    for ( a = 0; a < 3; a++) {
+        currentWord[0] = letters[phoneNum[0]][a];
+        for ( b = 0; b < 3; b++) {
+            currentWord[1] = letters[phoneNum[1]][b];
+            for ( c = 0; c < 3; c++) {
+                currentWord[2] = letters[phoneNum[2]][c];
+                for ( d = 0; d < 3; d++) {
+                    currentWord[3] = letters[phoneNum[3]][d];
+                    for ( e = 0; e < 3; e++) {
+                        currentWord[4] = letters[phoneNum[4]][e];
+                        for ( f = 0; f < 3; f++) {
+                            currentWord[5] = letters[phoneNum[5]][f];
+                            for ( g = 0; g < 3; g++) {
+                                currentWord[6] = letters[phoneNum[6]][g];
+                                fprintf(outputFile, "%s\n", currentWord);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
