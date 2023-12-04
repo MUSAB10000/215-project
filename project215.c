@@ -13,13 +13,13 @@ int main() {
    scanf("%8s", input);
     if (strlen(input) != 7) {
         printf("Invalid input! Please enter a seven-digit number.\n");
-        return 1; // Exit the program
+        return 1; 
     }
     for (i = 0; i < 7; i++) {
-       int digit = input[i] - '0'; // Convert character to integer
+       int digit = input[i] - '0'; 
         if (digit <= 1 || digit > 9) {
             printf("Invalid input! Please enter a number excluding 0 and 1.\n");
-            return 1; // Exit the program
+            return 1; 
         }
 
         phoneNumber[i] = digit;
